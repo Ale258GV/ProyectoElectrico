@@ -1,0 +1,29 @@
+//Equipo 2
+//Proyecto final
+//Estructuras de datos 
+9
+Santiago_De_Queretaro_Qro
+Santa_Rosa_Jauregui_Qro
+San_Juan_Del_Rio_Qro
+Celaya_Gto
+Irapuato_Gto
+Guanajuato_Gto
+Ezequiel_Montes_Qro
+San_Joaquin_Qro
+Zimapan_Hgd
+Santiago_De_Queretaro_Qro*Santa_Rosa_Jauregui_Qro*17
+Santiago_De_Queretaro_Qro*Celaya_Gto*48
+Santiago_De_Queretaro_Qro*Ezequiel_Montes_Qro*67
+Santa_Rosa_Jauregui_Qro*Santiago_De_Queretaro_Qro*17
+San_Juan_Del_Rio_Qro*Ezequiel_Montes_Qro*35
+Celaya_Gto*Santiago_De_Queretaro_Qro*48
+Celaya_Gto*Irapuato_Gto*63
+Irapuato_Gto*Celaya_Gto*63
+Irapuato_Gto*Guanajuato_Gto*76
+Guanajuato_Gto*Irapuato_Gto*76
+Ezequiel_Montes_Qro*Santiago_De_Queretaro_Qro*67
+Ezequiel_Montes_Qro*San_Juan_Del_Rio_Qro*35
+Ezequiel_Montes_Qro*San_Joaquin_Qro*55
+San_Joaquin_Qro*Ezequiel_Montes_Qro*55
+San_Joaquin_Qro*Zimapan_Hgd*25
+Zimapan_Hgd*San_Joaquin_Qro*25
