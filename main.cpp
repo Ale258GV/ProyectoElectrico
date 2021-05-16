@@ -20,14 +20,14 @@ Grupo: 30
 */
 
 //NOTAS
-//Todo el code que está aquí hasta el momento, es de Daniel
-//Revisar el code con los archivos GrafoTXT_Opcion1 y GrafoTXT_Opcion2, ya que con esos archivos no funciona el code
+// HAY QUE AGREGAR LA IMPLEMENTACIÓN DEL ALGORITMO DE FLOYD
 int main()
 {
     string cad;
-    ifstream arch_ent("GrafoEj.txt"); /**Archivo de texto, de donde se saca el grafo*/
+    ifstream arch_ent("GrafoTXT_Opcion1.txt"); /**Archivo de texto, de donde se saca el grafo*/
+    //ifstream arch_ent("GrafoEj.txt");
     getline(arch_ent, cad);
-    int tam = stoi(cad); /**Cantidad de nodos*/
+    int tam = stoi(cad); /**Cantidad de nodos*/ /**La función stoi convierte un string a int, en este caso cad la primera línea en el txt, la cual es la cantidad de nodos*/
     string nodos[tam];
 
     for(int i=0; i<tam; i++){ /**Obtener los nodos*/
@@ -44,21 +44,22 @@ int main()
     }
 
     while(!arch_ent.eof()){ /**Obtener aristas*/
-        getline(arch_ent, cad);
+        getline(arch_ent, cad); /**Obtener linea del txt*/
 
         int a = cad.size(); /**Tamaño de la línea*/
         string nodo1, nodo2;
         int posEspacio, posEspacio2;
 
-        posEspacio = cad.find(' '); /**Obtener 1er nodo*/
+        /**Cambiar el caracter dentro del .find dependiendo del archivo de texto que se use*/
+        posEspacio = cad.find('*'); /**Obtener 1er nodo*/
         nodo1 = cad.substr(0,posEspacio);
         cad.replace(0,posEspacio+1,"");
 
-        posEspacio2 = cad.find(' '); /**Obtener 2do nodo*/
-        nodo2 = cad.substr(0,posEspacio);
+        posEspacio2 = cad.find('*'); /**Obtener 2do nodo*/
+        nodo2 = cad.substr(0,posEspacio2);
         cad.replace(0,posEspacio2+1,"");
 
-        double costo = stod(cad); /**Obtener costo*/
+        double costo = stod(cad); /**Obtener costo*/ /**La función stod convierte un string a double*/
 
         int posNodo1, posNodo2=-1;
 
@@ -74,7 +75,7 @@ int main()
 
         cout<<""<<nodo1;
         cout<<" "<<nodo2;
-        cout<<" "<<costo<< " - Pos donde almacenar costo: "<< posNodo1<<", "<< posNodo2<<endl;
+        cout<<"      "<<costo<< " -> Posicion donde almacenar costo: "<< posNodo1<<", "<< posNodo2<<endl;
         /**Insertar en matriz de adyacencia*/
         aristas[posNodo1][posNodo2] = costo;
         aristas[posNodo2][posNodo1] = costo;
@@ -84,7 +85,7 @@ int main()
     cout<< "\nMatriz de Adyacencia:" <<endl;
     for(int k = 0; k<tam; k++){
         for(int l = 0; l<tam; l++){
-            cout<< aristas[k][l] << ", ";
+            cout << aristas[k][l] << "\t";
         }
         cout<< endl;
     }

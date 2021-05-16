@@ -1,6 +1,3 @@
-//Equipo 2
-//Proyecto final
-//Estructuras de datos 
 9
 Santiago_De_Queretaro_Qro
 Santa_Rosa_Jauregui_Qro
