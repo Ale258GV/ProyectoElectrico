@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1621209168 source:c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+
