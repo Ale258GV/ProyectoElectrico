@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream> /**Libreria para poder leer files o txt*/
 #include <string> /**Libreria para poder trabajar con metodos de string*/
+#include "Nodo.h"
+#include "Arista.h"
+#include "Grafo.h"
 using namespace std;
 
 /**
@@ -19,75 +22,107 @@ Grupo: 30
 4to. Semestre
 */
 
-//NOTAS
-// HAY QUE AGREGAR LA IMPLEMENTACIÓN DEL ALGORITMO DE FLOYD
+void verDatosNodo(Nodo *a){
+    cout << "---Atributos del Nodo---" << endl;
+    cout << "Nombre Ciudad: " << a->verNombreCiudad() << endl;
+    cout << "Estado Ciudad: " << a->verEstadoCiudad()<< endl;
+    cout << "Descripcion: " << a->verDescripcion() << endl;
+    cout << "Ubicacion: " << a->verUbicacion() << endl;
+    cout << "Numero de la Ciudad: " << a->verNumeroCiudad() << endl;
+    cout << "Poblacion Ciudad: " << a->verPoblacionCiudad() << endl;
+    cout << "Demanda de energia por Ciudad: " << a->verDemandaEnergiaCiudad() << endl;
+    cout << "Energia Almacenada: " << a->verEnergia() << endl;
+    if(a->verSuministrarEnergia() == true){
+        cout << "La central administra energia" << endl << endl;
+    }else{
+        cout << "La central solamente recibe energia" << endl << endl;
+    }
+}
+void verDatosAris(Arista *a){
+    cout << "---Atributos de la Arista---" << endl;
+    a->verConexionNodos();
+    cout << "Costo por Cantidad de Cable: " << a->verCostoMonetario() << endl;
+    cout << "Cableado por Metros: " << a->verCableado() << endl;
+    cout << "Calibre: " << a->verCalibre() << endl;
+    cout << "Cantidad Suministrada de Energia: " << a->verCantSuministrada() << endl << endl;
+}
+
 int main()
 {
-    string cad;
-    ifstream arch_ent("GrafoTXT_Opcion1.txt"); /**Archivo de texto, de donde se saca el grafo*/
-    //ifstream arch_ent("GrafoEj.txt");
-    getline(arch_ent, cad);
-    int tam = stoi(cad); /**Cantidad de nodos*/ /**La función stoi convierte un string a int, en este caso cad la primera línea en el txt, la cual es la cantidad de nodos*/
-    string nodos[tam];
+    /*Nodo *central = new Nodo("Pie de Gallo", "Queretaro", "Un lugar bien bonito", "Calle idk", 1, 50, 50.0, 100.0, true);
+    Nodo *central2 = new Nodo("San Francisco", "Guanajuato", "Casita Chiquita", "Av. idk", 2, 80, 80.0, 0, false);
+    Arista *cableado = new Arista(15, 10, 20);
 
-    for(int i=0; i<tam; i++){ /**Obtener los nodos*/
-        getline(arch_ent, cad);
-        nodos[i]=cad;
-    }
+    cableado->conectarNodos(central, central2);
+    verDatosNodo(central);
+    verDatosAris(cableado);*/
 
-    double aristas[tam][tam];
+    /*Nodo *A = new Nodo("Pie de gallo", 100, true);
+    Nodo *B = new Nodo("San Isidro Buenavista", 0, false);//85
+    Nodo *C = new Nodo("Santa Maria los Baños", 50, true);
+    Arista *a1 = new Arista(15);
+    Arista *a2 = new Arista(30);
 
+    a1->conectarNodos(A, B);
+    a2->conectarNodos(B, C);
+
+    verDatosAris(a1);
+    verDatosAris(a2);*/
+
+    Grafo *g = new Grafo("GrafoTXT_Opcion1.txt");
+    g->muestraGrafo();
+
+    //algoritmo floyd warshall
+    int tam = g->verTam();
+    double matriz2[tam][tam];
     for(int o = 0; o<tam; o++){
         for(int p = 0; p<tam; p++){
-            aristas[o][p] = 0;
+            matriz2[o][p] = g->matriz[o][p];
+        }
+    }
+    string caminos[tam][tam];
+    for(int o = 0; o<tam; o++){
+        for(int p = 0; p<tam; p++){
+            caminos[o][p] = g->nodos[o]->verUbicacion() + "-" + g->nodos[p]->verUbicacion();
         }
     }
 
-    while(!arch_ent.eof()){ /**Obtener aristas*/
-        getline(arch_ent, cad); /**Obtener linea del txt*/
-
-        int a = cad.size(); /**Tamaño de la línea*/
-        string nodo1, nodo2;
-        int posEspacio, posEspacio2;
-
-        /**Cambiar el caracter dentro del .find dependiendo del archivo de texto que se use*/
-        posEspacio = cad.find('*'); /**Obtener 1er nodo*/
-        nodo1 = cad.substr(0,posEspacio);
-        cad.replace(0,posEspacio+1,"");
-
-        posEspacio2 = cad.find('*'); /**Obtener 2do nodo*/
-        nodo2 = cad.substr(0,posEspacio2);
-        cad.replace(0,posEspacio2+1,"");
-
-        double costo = stod(cad); /**Obtener costo*/ /**La función stod convierte un string a double*/
-
-        int posNodo1, posNodo2=-1;
-
-        /**Buscar posicion correspondiente al 1er y 2do Nodo*/
-        for(int j = 0; j<tam; j++){
-            if(nodos[j] == nodo1){
-                posNodo1 = j;
+    //Algoritmo de Floyd-Warshall
+    int i, j, k;
+    for (k = 0; k < tam; k++)
+    {
+        for (i = 0; i < tam; i++)
+        {
+            for (j = 0; j < tam; j++)
+            {
+                if ((matriz2[i][k] * matriz2[k][j] != 0) && (i != j))
+                {
+                    if ((matriz2[i][k] + matriz2[k][j] < matriz2[i][j]) || (matriz2[i][j] == 0))
+                    {
+                        matriz2[i][j] = matriz2[i][k] + matriz2[k][j];
+                        caminos[i][j] = caminos[i][k] + "-" + caminos[k][j];
+                        //cout << caminos[i][j] + "=" + caminos[i][k]  + " + " + caminos[k][j] << endl;
+                        //cout << caminos[i][j] << "     " << matriz2[i][j] << endl;
+                        g->aristas[j]->conectarNodos(g->nodos[i], g->nodos[j]);
+                        g->aristas[j]->verConexionNodos();
+                        cout << i << " - " << j << " - " << k << endl << endl;
+                    }
+                }
             }
-            if(nodos[j] == nodo2){
-                posNodo2 = j;
-            }
+        }
+    }
+    //Imprimir costes minimos con camino
+    for (i = 0; i < tam; i++)
+    {
+        cout<<"\nCoste minimo con respecto al nodo:" << g->nodos[i]->verUbicacion()<<endl;
+        for (j = 0; j < tam; j++)
+        {
+            cout<<"\tCon "<< g->nodos[j]->verUbicacion() << ": " << matriz2[i][j] << " con camino: " << caminos[i][j] <<endl;
         }
 
-        cout<<""<<nodo1;
-        cout<<" "<<nodo2;
-        cout<<"      "<<costo<< " -> Posicion donde almacenar costo: "<< posNodo1<<", "<< posNodo2<<endl;
-        /**Insertar en matriz de adyacencia*/
-        aristas[posNodo1][posNodo2] = costo;
-        aristas[posNodo2][posNodo1] = costo;
     }
 
-    /**Imprimir Matriz de Adyacencia*/
-    cout<< "\nMatriz de Adyacencia:" <<endl;
-    for(int k = 0; k<tam; k++){
-        for(int l = 0; l<tam; l++){
-            cout << aristas[k][l] << "\t";
-        }
-        cout<< endl;
-    }
+    //cout << g->nodos[2]->verUbicacion() << endl;
+    //cout << g->aristas[5]->verCableado() << endl;
     return 0;
 }

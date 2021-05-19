@@ -1,6 +1,41 @@
 # depslib dependency file v1.0
-1621209168 source:c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\main.cpp
+1621393373 source:c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\main.cpp
 	<iostream>
 	<fstream>
 	<string>
+	"Nodo.h"
+	"Arista.h"
+	"Grafo.h"
+
+1621395145 source:c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\src\arista.cpp
+	"Arista.h"
+	"Nodo.h"
+
+1621393373 c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\include\arista.h
+	"Nodo.h"
+
+1621348331 c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\include\nodo.h
+	<iostream>
+	<string>
+
+1621319181 source:c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\src\nodo.cpp
+	"Nodo.h"
+	<iostream>
+	<string>
+
+1621395141 source:c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\src\grafo.cpp
+	"Grafo.h"
+	<fstream>
+	<stdlib.h>
+	<string>
+	<iostream>
+	"Nodo.h"
+	"Arista.h"
+
+1621395144 c:\users\alegv\documents\escuela\estructuras de datos\c++\proyectoelectrico\include\grafo.h
+	<fstream>
+	"Nodo.h"
+	"Arista.h"
+	<string>
+	<iostream>
 
