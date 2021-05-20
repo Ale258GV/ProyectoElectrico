@@ -53,34 +53,36 @@ void Arista::setCantSuministrada(double cantSuministrada2){
 }
 
 void Arista::conectarNodos(Nodo *primerNodo, Nodo *segundoNodo){
-    Nodo *nodoPrincipal, *nodoDestino;
-    nodoPrincipal = primerNodo; //Null
-    nodoDestino = segundoNodo; //Null
-    inicial = nodoPrincipal;
-    sig = nodoDestino;
-
+    inicial = primerNodo;
+    sig = segundoNodo;
     if(sig->verSuministrarEnergia() == true){
         double sum, energiaPrincipal, energiaDestino;
-        energiaPrincipal = nodoPrincipal->verEnergia();
-        energiaDestino = nodoDestino->verEnergia();
+        energiaPrincipal = inicial->verEnergia();
+        energiaDestino = sig->verEnergia();
         sum = (energiaPrincipal - cableado) + energiaDestino;
-        nodoDestino->setEnergia(sum);
+        sig->setEnergia(sum);
     }else{
         double resto, energiaPrincipal;
-        energiaPrincipal = nodoPrincipal->verEnergia();
-        resto = energiaPrincipal + cableado; //cambiar +/- en caso de diferentefuncion (+ ver coste)(- cobrar coste)
-        nodoDestino->setEnergia(resto);
+        energiaPrincipal = inicial->verEnergia();
+        resto = energiaPrincipal - cableado; //cambiar +/- en caso de diferentefuncion (+ ver coste)(- cobrar coste)
+        sig->setEnergia(resto);
     }
 }
 
 void Arista::verConexionNodos(){
-    cout << "---Nodo Inicial---" << endl;
-    cout << "Ubicacion: " << inicial->verUbicacion() << endl;
+    // << endl << "---Nodo Inicial---" << endl;
+    //cout << "Ubicacion: " << inicial->verUbicacion() << endl;
     //cout << "Cantidad de Energia que Suministra: " << inicial->verEnergia() << endl;
-    //(inicial->verSuministrarEnergia() == true) ? cout << "La central administra energia" << endl : cout << "La central solamente recibe energia" << endl;
-    cout << endl << "---Nodo Destino---" << endl;
-    cout << "Ubicacion: " << sig->verUbicacion() << endl;
+    //(inicial->verSuministrarEnergia() == true) ? cout << "El nodo es una central" << endl : cout << "El nodo es una ciudad" << endl;
+    //cout << endl << "---Nodo Destino---" << endl;
+    //cout << "Ubicacion: " << sig->verUbicacion() << endl;
     //cout << "Cantidad de Energia que Suministra: " << sig->verEnergia() << endl;
-    //(sig->verSuministrarEnergia() == true) ? cout << "La central administra energia" << endl : cout << "La central solamente recibe energia" << endl;
+    //(sig->verSuministrarEnergia() == true) ? cout << "El nodo es una central" << endl : cout << "El nodo es una ciudad" << endl;
+    cout << endl << "\t" << inicial->verUbicacion() << "  -----  " << sig->verUbicacion() << endl;
+    if(inicial->verSuministrarEnergia() == true){
+        cout << endl << "\t" << inicial->verEnergia() << "  -----  " << sig->verEnergia() << endl;
+    }else{
+        cout << endl << "\t" << "0" << "  -----  " << "0" << endl;
+    }
     cout << endl;
 }

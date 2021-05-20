@@ -27,7 +27,6 @@ class Arista
 	void setCalibre(double calibre2);
 	void setCantSuministrada(double cantSuministrada2);
 
-
 	void conectarNodos(Nodo *primerNodo, Nodo *segundoNodo);
     void verConexionNodos();
 };

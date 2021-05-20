@@ -7,16 +7,11 @@
 #include "Arista.h"
 using namespace std;
 
-Grafo::Grafo(char *nomArch){
+Grafo::Grafo(string nomArch){
+    string cad;
     ifstream arch_ent(nomArch); /**Archivo de texto, de donde se saca el grafo*/
-    //arch.open(nomArch);
-    if(arch_ent.fail()){
-       cout << "Error al abrir el archivo del grafo !!!";
-       exit(1);
-    }
     getline(arch_ent, cad);
     tam = stoi(cad); /**Cantidad de nodos*/ /**La función stoi convierte un string a int, en este caso cad la primera línea en el txt, la cual es la cantidad de nodos*/
-    //numNodos = atoi(cad.c_str());
 
     nodos = new Nodo*[tam];
     for(int i=0; i<tam; i++){ /**Obtener los nodos*/
@@ -25,7 +20,6 @@ Grafo::Grafo(char *nomArch){
     }
 
     matriz = new double*[tam];
-
     for(int o = 0; o < tam; o++){ /**Generar matriz en ceros*/
         matriz[o] = new double[tam];
         for(int p = 0; p < tam; p++){
@@ -33,8 +27,15 @@ Grafo::Grafo(char *nomArch){
         }
     }
 
-    aristas = new Arista*[tam-1];
+    aristas = new Arista*[tam];
+    for(int o = 0; o < tam; o++){ /**Generar matriz en ceros*/
+        aristas[o] = new Arista[tam];
+        for(int p = 0; p < tam; p++){
+            aristas[o][p] = 0;
+        }
+    }
 
+    cout << endl << "Datos del Grafo" << endl;
     while(!arch_ent.eof()){ /**Obtener aristas*/
         getline(arch_ent, cad); /**Obtener linea del txt*/
 
@@ -65,15 +66,11 @@ Grafo::Grafo(char *nomArch){
             }
         }
 
-        cout<<""<<nodo1;
-        cout<<" "<<nodo2;
-        cout<<"      "<<costo<< " -> Posicion donde almacenar costo: "<< posNodo1<<", "<< posNodo2<<endl;
+        cout << nodo1 << "\t" << nodo2 << "\t" << costo << " -> Posicion donde almacenar costo: " << posNodo1 << ", " << posNodo2 << endl;
         matriz[posNodo1][posNodo2] = costo;
         matriz[posNodo2][posNodo1] = costo;
-
-        /**Obtener las Aristas*/
-        aristas[contador] = new Arista(costo);
-        contador++;
+        aristas[posNodo1][posNodo2] = Arista(costo);
+        aristas[posNodo2][posNodo1] = Arista(costo);
     }
 }
 void Grafo::muestraGrafo(){

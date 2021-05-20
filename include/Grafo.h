@@ -15,12 +15,9 @@ class Grafo
     int tam;
     double **matriz;
     ifstream arch_ent;
-    string cad;
-    int contador = 0;
 
-    Grafo(char *nomArch);
+    Grafo(string nomArch);
     int verTam();
-    void generaGrafo(); /** llenar vertices y matriz adyacencia*/
     void muestraGrafo();
 };
 
