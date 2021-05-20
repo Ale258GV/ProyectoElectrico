@@ -24,7 +24,7 @@ Grupo: 30
 */
 
 void verDatosNodo(Nodo *a){
-    cout << "---Atributos del Nodo---" << endl;
+    cout << endl << "---Atributos del Nodo---" << endl;
     cout << "Nombre Ciudad: " << a->verNombreCiudad() << endl;
     cout << "Estado Ciudad: " << a->verEstadoCiudad()<< endl;
     cout << "Descripcion: " << a->verDescripcion() << endl;
@@ -155,7 +155,7 @@ void menuElectrico(){
             case 4:{
                 string str;
                 double num;
-                cout << endl << "Pon el nombre del nodo que administra energia: ";
+                cout << endl << "Pon el nombre del nodo que administrara la energia: ";
                 cin >> str;
                 cout << endl << "Establece la energia del nodo: ";
                 cin >> num;
@@ -163,8 +163,10 @@ void menuElectrico(){
                     if(g->nodos[i]->verUbicacion() == str){
                         g->nodos[i]->setEnergia(num);
                         g->nodos[i]->setSuministrarEnergia(true);
+                        verDatosNodo(g->nodos[i]);
                     }
                 }
+
                 break;
             }
             case 5: {
