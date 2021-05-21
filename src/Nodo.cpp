@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
 Nodo::Nodo() {
     nombreCiudad = "";
 	estadoCiudad = "";
@@ -63,7 +62,6 @@ double Nodo::verEnergia(){
 bool Nodo::verSuministrarEnergia(){
     return suministrarEnergia;
 }
-
 /**Metodos de cambio de Atributo*/
 void Nodo::setNombreCiudad(string nombreCiudad2){
     nombreCiudad = nombreCiudad2;

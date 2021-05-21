@@ -6,7 +6,6 @@
 #include "Nodo.h"
 #include "Arista.h"
 using namespace std;
-
 Grafo::Grafo(string nomArch){
     string cad;
     ifstream arch_ent(nomArch); /**Archivo de texto, de donde se saca el grafo*/

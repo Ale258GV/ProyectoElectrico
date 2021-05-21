@@ -1,6 +1,5 @@
 #include "Arista.h"
 #include "Nodo.h"
-
 Arista::Arista(){
     inicial = NULL;
     sig = NULL;
@@ -51,7 +50,6 @@ void Arista::setCalibre(double calibre2){
 void Arista::setCantSuministrada(double cantSuministrada2){
     cantSuministrada = cantSuministrada2;
 }
-
 void Arista::conectarNodos(Nodo *primerNodo, Nodo *segundoNodo){
     inicial = primerNodo;
     sig = segundoNodo;
@@ -64,11 +62,10 @@ void Arista::conectarNodos(Nodo *primerNodo, Nodo *segundoNodo){
     }else{
         double resto, energiaPrincipal;
         energiaPrincipal = inicial->verEnergia();
-        resto = energiaPrincipal - cableado; //cambiar +/- en caso de diferentefuncion (+ ver coste)(- cobrar coste)
+        resto = energiaPrincipal - cableado; //cambiar +/- en caso de diferente funcion (+ ver coste)(- cobrar coste)
         sig->setEnergia(resto);
     }
 }
-
 void Arista::verConexionNodos(){
     // << endl << "---Nodo Inicial---" << endl;
     //cout << "Ubicacion: " << inicial->verUbicacion() << endl;

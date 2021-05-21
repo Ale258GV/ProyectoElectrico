@@ -6,7 +6,6 @@
 #include "Arista.h"
 #include "Grafo.h"
 using namespace std;
-
 /**
 Estructura de Datos
 Equipo 2: Proyecto Eléctrico
@@ -22,7 +21,6 @@ Integrantes:
 Grupo: 30
 4to. Semestre
 */
-
 void verDatosNodo(Nodo *a){
     cout << endl << "---Atributos del Nodo---" << endl;
     cout << "Nombre Ciudad: " << a->verNombreCiudad() << endl;
@@ -166,7 +164,6 @@ void menuElectrico(){
                         verDatosNodo(g->nodos[i]);
                     }
                 }
-
                 break;
             }
             case 5: {
@@ -180,7 +177,6 @@ void menuElectrico(){
         }
     }
 }
-
 int main()
 {
     menuElectrico();

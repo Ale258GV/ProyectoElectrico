@@ -3,9 +3,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
-class Nodo
-{
+class Nodo {
         private:
     /**Atributos*/
 	string nombreCiudad;
@@ -43,5 +41,4 @@ class Nodo
     void setEnergia(double energia2);
     void setSuministrarEnergia(bool suministrarEnergia2);
 };
-
 #endif // NODO_H

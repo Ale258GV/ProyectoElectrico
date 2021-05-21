@@ -6,19 +6,15 @@
 #include <string>
 #include <iostream>
 using namespace std;
-
-class Grafo
-{
+class Grafo {
     public:
     Nodo **nodos;
     Arista **aristas;
     int tam;
     double **matriz;
     ifstream arch_ent;
-
     Grafo(string nomArch);
     int verTam();
     void muestraGrafo();
 };
-
 #endif // GRAFO_H
