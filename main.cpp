@@ -54,6 +54,7 @@ void menuElectrico(){
     cin >> txt;
     Grafo *g = new Grafo(txt);
     //Grafo *g = new Grafo("GrafoTXT_Opcion2.txt");
+
     if(arch_ent.fail()){
         cout << "Error al abrir el archivo del grafo...";
         exit(1);
@@ -78,20 +79,9 @@ void menuElectrico(){
                 break;
             }
             case 2: {
-                /**Algoritmo Floyd-Warshall*/
-                double costoMinimo[tam][tam];
                 for(int o = 0; o<tam; o++){
                     for(int p = 0; p<tam; p++){
-                        costoMinimo[o][p] = g->matriz[o][p];
-                    }
-                }
-                string caminos[tam][tam];
-                for(int o = 0; o<tam; o++){
-                    for(int p = 0; p<tam; p++){
-                        if(g->nodos[o]->verUbicacion() == g->nodos[p]->verUbicacion()){
-                            caminos[o][p] = "";
-                        }else{
-                            caminos[o][p] = g->nodos[o]->verUbicacion() + "--" + to_string(g->matriz[o][p]) + "-->" + g->nodos[p]->verUbicacion();
+                        if(g->nodos[o]->verUbicacion() != g->nodos[p]->verUbicacion()){
                             /**Almacenar todos los caminos posibles en la clase grafo*/
                             g->aristas[o][p].conectarNodos(g->nodos[o], g->nodos[p]);
                             verDatosAris(&g->aristas[o][p]);
@@ -128,7 +118,8 @@ void menuElectrico(){
                         {
                             if ((costoMinimo[i][k] * costoMinimo[k][j] != 0) && (i != j))
                             {
-                                if ((costoMinimo[i][k] + costoMinimo[k][j] <costoMinimo[i][j]) || (costoMinimo[i][j] == 0))
+
+                                if ((costoMinimo[i][k] + costoMinimo[k][j] < costoMinimo[i][j]) || (costoMinimo[i][j] == 0))
                                 {
                                     caminos[i][j] = caminos[i][k] + ", " + caminos[k][j];
                                     costoMinimo[i][j] = costoMinimo[i][k] + costoMinimo[k][j];
